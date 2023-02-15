@@ -134,6 +134,12 @@ These are the inbound rules we have applied.
 
 ![img_7.png](img_7.png)
 
+# Installing our app
+
+Now to install our app we need to first get the app file into our ssh which can be done with the command `scp -i devops-tech201.pem -r <your app path> ubuntu@<your IP in the example block you paste to ssh into ec2>:/home/ubuntu`
+
+and this will allow you to now have your app folder inside your ec2
+
 
 
 
