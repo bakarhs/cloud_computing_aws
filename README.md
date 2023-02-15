@@ -95,3 +95,54 @@ The main differences between OpEx and CapEx are:
 Overall, businesses need to carefully manage both OpEx and CapEx to ensure that they are spending their money effectively and efficiently, while also balancing short-term expenses with long-term investments in their business.
 
 # Examples of companies that use the cloud - and what for
+
+
+# Migrating our app to the host
+
+![img_1.png](img_1.png)
+
+## Running nginx on aws
+
+We want to start by signing in to our AWS account and making our way to EC2's dashboard
+
+![img.png](img.png)
+
+Now we want to launch an EC2 and adjust the setting to our needs:
+
+![img_2.png](img_2.png)
+
+![img_3.png](img_3.png)
+
+1. Make sure to name your file, so you can identify the instance created
+2. We want to make sure we are using the right os and for us that is : `Ubuntu Server 18.04 LTS (HVM), SSD Volume Typeami-02f0341ac93c96375 (64-bit (x86)) / ami-0762687a8d9956f0f (64-bit (Arm))` 
+3. Next we need to use a keypair in order to be allowed ssh access to the instance. (This was given to us by Sharukh)
+4. The next stage is that we need to change the network settings so that we have a security group and VPC selected. We decided to create security groups and the rules 
+
+![img_4.png](img_4.png)
+
+These are the inbound rules we have applied.
+
+![img_5.png](img_5.png)
+
+5. Now that are instance is running we need to we need to connect with it via ssh, first we need to change the read/write rules on our key buy inputting `chmod 400 devops-tech201.pem`
+6. Now in git bash we can connect to our instance by using `ssh -i "devops-tech201.pem" ubuntu@ec2-34-242-189-225.eu-west-1.compute.amazonaws.com`
+7. Now when we search our public IP we should be welcomed to Nginx you can get this on EC2 instance connect
+
+![img_6.png](img_6.png)
+
+8. Finally, you should be welcomed to nginx:
+
+![img_7.png](img_7.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
