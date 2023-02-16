@@ -177,8 +177,14 @@ DevOps is an approach that emphasizes collaboration and communication between de
 Agile and Scrum are methodologies that emphasize iterative development, continuous delivery, and collaboration between team members. A 2-tier architecture can help support these methodologies by providing a scalable architecture that allows teams to work independently and deliver changes quickly. By using cloud services, it's also possible to leverage the benefits of agile and Scrum by automating deployment and testing, ensuring fast feedback loops and continuous integration.
 
 
-
-
+# Requirements
+- App tier deployed -> available on public IP
+- Create 2nd tier database on ec2 with required dependencies: Ubuntu 18.04, mongodob installed, change mongod.conf 0.0.0.0.
+- Need a security group for our database - allow 27017 from anywhere - allow only from app instance
+- Go back to the app and create an environment variable with the database endpoint
+- Relaunch the app
+- Securing architecture with security groups
+- App is exposed to the world, database is exposed only to app, limiting access to database
 
 
 
