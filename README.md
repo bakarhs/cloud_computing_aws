@@ -140,10 +140,41 @@ Now to install our app we need to first get the app file into our ssh which can 
 
 and this will allow you to now have your app folder inside your ec2
 
+# SSH
+Using key pairs to SSH involves generating a public and private key on your local machine, and then adding the public key to the remote server. Here are some key points to keep in mind when using key pairs to SSH:
 
+- Key pairs provide a more secure method of authentication than traditional password-based authentication.
+- When connecting to the remote server, specify the private key file with the -i option, for example: ssh -i ~/.ssh/id_rsa user@server.
 
+- It's important to keep the private key file secure and not share it with others.
 
+- Key pairs can be used with SSH agents.
 
+In summary, using key pairs to SSH provides a more secure method of authentication and involves generating a key pair on your local machine, adding the public key to the remote server, and specifying the private key file when connecting. It's important to keep the private key file secure and consider using an SSH agent to avoid having to enter passwords multiple times.
+
+# Creating a 2-tier architecture
+
+![img_8.png](img_8.png)
+
+## Why do we need to make a 2-tier architecture ?
+
+A two-tier architecture, also known as client-server architecture, is a way to divide an application into two parts: a client that provides a user interface and a server that performs the data processing. This architecture provides several benefits, such as increased scalability, improved performance, and better security.
+
+## Why do we need to refactor a monolithic architecture into a 2-tier?
+
+A monolithic architecture is a type of architecture in which an entire application is built as a single unit. This can make the application difficult to maintain, scale, and deploy. Refactoring a monolithic architecture into a 2-tier architecture can help solve these problems by dividing the application into two parts: a front-end client and a back-end server.
+
+## Why did we do it on the cloud?
+
+The cloud offers several advantages for a 2-tier architecture, including scalability, reliability, and cost-effectiveness. By leveraging cloud services, it's possible to easily scale up or down depending on the demand for the application, ensure high availability, and reduce infrastructure costs.
+
+## How does this fit into DevOps?
+
+DevOps is an approach that emphasizes collaboration and communication between development and operations teams. A 2-tier architecture can help facilitate DevOps practices by separating concerns between the front-end and back-end, allowing teams to work independently and deploy changes faster. By using cloud services, it's also possible to automate deployment and infrastructure management, which can further streamline DevOps processes.
+
+## How does this fit into agile/ SCRUM?
+
+Agile and Scrum are methodologies that emphasize iterative development, continuous delivery, and collaboration between team members. A 2-tier architecture can help support these methodologies by providing a scalable architecture that allows teams to work independently and deliver changes quickly. By using cloud services, it's also possible to leverage the benefits of agile and Scrum by automating deployment and testing, ensuring fast feedback loops and continuous integration.
 
 
 
