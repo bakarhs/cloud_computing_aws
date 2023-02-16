@@ -280,7 +280,28 @@ What we now need to do is seed our database with `node seeds/seed.js` and when w
 
 ## Note to self 
 
+There are two different curl commands when provisioning app, and you need to make suer to use the right one for yourself
+
+```
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - # This is the correct one i should have been using 
+
+curl -sL https://deb.nodesource.com/setup_6.x # This is version 6 and it did not work with my app provisioning
+
+```
+
+![img_1.png](images/img_11.png)
+
+![img.png](images/img_12.png)
+
 Had a versioning problem that did not allow me to `npm install` so i should go straight into `node app.js`
+
+To add execute permissions to your provision.sh `chmod +x provision.sh`
+
+To run a script `./filename`. Make sure there is `#!/bin/bash` inside the top of the file
+
+To check what's inside a file to make sure the correct changes are saved use `cat <filename>`
+
+
 
 
 
