@@ -227,7 +227,60 @@ Now all we need to do is check if mongod is active by using the command `sudo sy
 
 ![img_10.png](images/img_10.png)
 
+Now one last thing we want to do is edit the configurations in our `mongod.conf` and you can find this in your `/etc` folder. The configuration want to change is that of the bindIP, and we want to make this 0.0.0.0 :
 
+```
+# mongod.conf
+
+#   http://docs.mongodb.org/manual/reference/configuration-options/
+
+# Where and how to store data.
+storage:
+  dbPath: /var/lib/mongodb
+  journal:
+    enabled: true
+#  engine:
+#  mmapv1:
+#  wiredTiger:
+
+# where to write logging data.
+systemLog:
+  destination: file
+  logAppend: true
+  path: /var/log/mongodb/mongod.log
+
+# network interfaces
+net:
+  port: 27017
+  bindIp: 0.0.0.0
+
+
+#processManagement:
+
+#security:
+
+#operationProfiling:
+
+#replication:
+
+#sharding:
+
+## Enterprise-Only Options:
+
+#auditLog:
+
+#snmp:
+```
+
+## Connecting our app to our database
+
+This can be done by creating an environmental variable in our app instance. What we need to do is ssh back into our app instance and use `export DB_HOST=mongodb://<database ip>:27017/posts`
+
+What we now need to do is seed our database with `node seeds/seed.js` and when we start `node app.js` we should be able to see that when we search `appIP:3000/posts` we can now see how our database and app are linked.
+
+## Note to self 
+
+Had a versioning problem that did not allow me to `npm install` so i should go straight into `node app.js`
 
 
 
