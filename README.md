@@ -99,40 +99,40 @@ Overall, businesses need to carefully manage both OpEx and CapEx to ensure that 
 
 # Migrating our app to the host
 
-![img_1.png](img_1.png)
+![img_1.png](images/img_1.png)
 
 ## Running nginx on aws
 
 We want to start by signing in to our AWS account and making our way to EC2's dashboard
 
-![img.png](img.png)
+![img.png](images/img.png)
 
 Now we want to launch an EC2 and adjust the setting to our needs:
 
-![img_2.png](img_2.png)
+![img_2.png](images/img_2.png)
 
-![img_3.png](img_3.png)
+![img_3.png](images/img_3.png)
 
 1. Make sure to name your file, so you can identify the instance created
 2. We want to make sure we are using the right os and for us that is : `Ubuntu Server 18.04 LTS (HVM), SSD Volume Typeami-02f0341ac93c96375 (64-bit (x86)) / ami-0762687a8d9956f0f (64-bit (Arm))` 
 3. Next we need to use a keypair in order to be allowed ssh access to the instance. (This was given to us by Sharukh)
 4. The next stage is that we need to change the network settings so that we have a security group and VPC selected. We decided to create security groups and the rules 
 
-![img_4.png](img_4.png)
+![img_4.png](images/img_4.png)
 
 These are the inbound rules we have applied.
 
-![img_5.png](img_5.png)
+![img_5.png](images/img_5.png)
 
 5. Now that are instance is running we need to we need to connect with it via ssh, first we need to change the read/write rules on our key buy inputting `chmod 400 devops-tech201.pem`
 6. Now in git bash we can connect to our instance by using `ssh -i "devops-tech201.pem" ubuntu@ec2-34-242-189-225.eu-west-1.compute.amazonaws.com`
 7. Now when we search our public IP we should be welcomed to Nginx you can get this on EC2 instance connect
 
-![img_6.png](img_6.png)
+![img_6.png](images/img_6.png)
 
 8. Finally, you should be welcomed to nginx:
 
-![img_7.png](img_7.png)
+![img_7.png](images/img_7.png)
 
 # Installing our app
 
@@ -154,7 +154,7 @@ In summary, using key pairs to SSH provides a more secure method of authenticati
 
 # Creating a 2-tier architecture
 
-![img_8.png](img_8.png)
+![img_8.png](images/img_8.png)
 
 ## Why do we need to make a 2-tier architecture ?
 
@@ -185,6 +185,48 @@ Agile and Scrum are methodologies that emphasize iterative development, continuo
 - Relaunch the app
 - Securing architecture with security groups
 - App is exposed to the world, database is exposed only to app, limiting access to database
+
+## Migrating our database to the host 
+
+We began by creating a new EC2 instance in the same way and naming it as the database. The only thing we had to make sure to do is change the inbound rules so that it's not accessible on port 80 / port 3000 byr rather on port 27017 which we get from our mongodb and also making sure to name our new security group with db-sg, so we can find it later on.
+
+![img_9.png](images/img_9.png)
+
+After using the same method to ssh into our virtual machine, the first thing we need to do is update/upgarde with `sudo apt-get update -y` `sudo apt-get upgrade -y`. This time instead of using the `scp` command we decided to clone into our database file by using `git clone` and now all we had to do is run our provision.sc. However, we need to make sure to comment out  anything that was not needed. 
+
+```
+#!/bin/bash
+
+# key installation
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv D68FA50FEA312927
+echo "deb https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+
+# update and upgrade
+sudo apt-get update -y
+sudo apt-get upgrade -y
+
+# install the db
+#sudo apt-get install mongodb-org=3.2.20 -y
+sudo apt-get install -y mongodb-org=3.2.20 mongodb-org-server=3.2.20 mongodb-org-shell=3.2.20 mongodb-org-mongos=3.2.20 mongodb-org-tools=3.2.20
+
+# start and enable database
+#sudo systemctl start mongod
+#sudo systemctl enable mongod
+
+# changing the ip
+#sudo rm /etc/mongod.conf
+#sudo cp environment/database/mongod.conf /etc/mongod.conf
+
+# start and enable database
+sudo systemctl restart mongod
+sudo systemctl enable mongod
+
+
+```
+Now all we need to do is check if mongod is active by using the command `sudo systemctl status mongod` and if everything is okay you will end up with this returned:
+
+![img_10.png](images/img_10.png)
+
 
 
 
