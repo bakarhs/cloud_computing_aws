@@ -278,7 +278,38 @@ This can be done by creating an environmental variable in our app instance. What
 
 What we now need to do is seed our database with `node seeds/seed.js` and when we start `node app.js` we should be able to see that when we search `appIP:3000/posts` we can now see how our database and app are linked.
 
+## Creating an Ami
+
+1. ssh into your app virtual machine
+2. Navigate to the directory with app.js and launch the app:
+node app.js (the app must be launched because you want to make an image of your machine in a running state, because that's how it will be saved)
+3. Select the app instance on AWS and from the actions drop down menu, select image and templates -> Create image
+4. Specify the image name following your naming convention, e.g. name-group-ve-ami
+5. In the description, use the same naming convention but also add what ports can connect to the instance, so that when you come back to the image further down the line you know how to use it, e.g : `name-group-ve-ami-port1-port2-port3-etc`
+6. Create the instance
+7. To find your instance from the AWS home page, search EC2 and click on it
+8. On the left-hand side, under Images, click AMIs
+9. Find your image by typing in your instance name
+10. Select the image and click Launch instance from AMI
+11. Name the instance appropriately `name-group-db-ami`
+12. Enter your key
+13. Select an existing security group, and choose your old db security group from the list
+- This step is why it is useful to name your security groups, as know you know what ports can be used
+14. Launch the instance
+15. From here, your instance should be initiated, with the same dependencies as when the image was created
+16. To relaunch your 2 tier architecture, simply update the environmental variable in your app ve to have the ip of the new db, and from there the steps are the same:
+17. Seed the database in the app directory using `node seeds/seed.js`
+18. Launch the app using `node app.js`
+
+## Setting a cloudWatch alarm
+
+You need to start by first enabling monitoring on your instance witch can be found using the sub heading once checking the instance then follow the guide:
+
+https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/US_AlarmAtThresholdEC2.html
+
 ## Note to self 
+
+MAKE SURE CONFIGURATION FILES ARE CORRECT
 
 There are two different curl commands when provisioning app, and you need to make suer to use the right one for yourself
 
