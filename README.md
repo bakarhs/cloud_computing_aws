@@ -301,6 +301,8 @@ node app.js (the app must be launched because you want to make an image of your 
 17. Seed the database in the app directory using `node seeds/seed.js`
 18. Launch the app using `node app.js`
 
+![img.png](img.png)
+
 ## Setting a cloudWatch alarm
 
 You need to start by first enabling monitoring on your instance witch can be found using the sub heading once checking the instance then follow the guide:
