@@ -418,6 +418,8 @@ Overall, these operations provide a comprehensive set of features for managing d
 
 ## Creating a S3 bucket 
 
+![img.png](images/img_17.png)
+
 1. First, we must create an instance in ec2 so that we may enter aws in cli (command line interface): the steps for theis is above ^ just make sure to allow access to port 22 and port 80.
 
 2. Next once ssh into our new s3 instance we need to make sure we have our secret access keys in a secure location such as our .ssh folder. Remember to update and upgrade before doing anything
