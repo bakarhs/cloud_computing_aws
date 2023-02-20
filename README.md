@@ -301,7 +301,7 @@ node app.js (the app must be launched because you want to make an image of your 
 17. Seed the database in the app directory using `node seeds/seed.js`
 18. Launch the app using `node app.js`
 
-![img.png](img.png)
+![img.png](images/img_13.png)
 
 ## Setting a cloudWatch alarm
 
@@ -415,3 +415,63 @@ Here is a brief overview of each of these operations in the context of S3:
 6. Download: To download data from S3, you can use the S3 API or the AWS Management Console to download files or folders from your S3 bucket. You can also use pre-signed URLs to provide temporary access to the object for a specific user or application.
 
 Overall, these operations provide a comprehensive set of features for managing data in S3, including uploading and downloading data, creating, reading, updating, and deleting objects.
+
+## Creating a S3 bucket 
+
+1. First, we must create an instance in ec2 so that we may enter aws in cli (command line interface): the steps for theis is above ^ just make sure to allow access to port 22 and port 80.
+
+2. Next once ssh into our new s3 instance we need to make sure we have our secret access keys in a secure location such as our .ssh folder. Remember to update and upgrade before doing anything
+```
+sudo apt update -y
+sudo apt upgrade -y
+```
+3. We now need to install python/ aws cli
+```
+sudo apt install python -y
+# python --version # if this is not version 3 we have to get it upto date
+
+alias python=python3 # should make this a persistant varible later on
+# python --version
+
+sudo apt install python3-pip
+sudo pip3 install awscli
+```
+4. The next step is to configure our aws cli by entering the access keys
+```
+aws configure
+
+#1. enter acces keys
+#2. enter sceret keys
+#3. select region <eu-west-1>
+#4. select format <JSON>
+```
+
+5. now we can check if we have access with:
+```
+aws s3 ls
+```
+6. We can now create a buck it s3:
+```
+aws s3 mb s3://<bucket-name> # Name needs to use "-" rather than "_" because s3 uses _ so we nee to refrain from using them
+```
+7. Now to copy a file into our bucket:
+```
+aws s3 cp <filename> s3://<bucketname> # if file is somewhere eles you mus provide absolute path
+```
+This is what the s3 bucket looks like with the file inside:
+
+![img_1.png](images/img_14.png)
+
+8. The next step is to allow permissions, if this is not done you will receive an error message:
+
+![img_2.png](images/img_15.png)
+
+In the permission subheading we need to allow access so people can read this file (if you have sensitive data be careful on whom you give permission) - this is the equivalent to chmod 700:
+
+![img_3.png](images/img_16.png)
+
+9. Now when you click on the url of the object you should be able to read the file in a browser
+
+
+
+
