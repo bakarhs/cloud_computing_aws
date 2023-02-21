@@ -536,5 +536,55 @@ Video that can help set up s3 bucket automation
 
 https://www.youtube.com/watch?v=qGS9UiCFVbo
 
+# ALB & Auto scaling
+
+![img.png](img.png)
+
+## What is an Application Load Balancer
+
+An Application Load Balancer (ALB) is a type of load balancer offered by Amazon Web Services (AWS). It is used to distribute incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, and IP addresses, in multiple Availability Zones. ALB is a fully managed service that automatically scales to handle the incoming application traffic. 
+
+ALB is designed to handle the varying load of your application traffic in a single Availability Zone or across multiple Availability Zones. It can also route requests to different application endpoints based on the content of the request. ALB provides advanced request routing features, such as weighted routing, content-based routing, and host-based routing. 
+
+ALB also provides built-in security features, such as SSL/TLS termination, authentication, and authorization. It also supports integration with other AWS services, such as Amazon CloudWatch for monitoring and Amazon Route 53 for DNS routing. 
+
+ALB is a cost-effective solution for distributing application traffic and providing high availability for your applications. It is easy to configure and manage, and can be used for a variety of applications, such as web applications, mobile applications, and microservices.
+
+## What is Autoscaling
+
+Autoscaling is a feature of Amazon Web Services (AWS) that allows users to automatically scale their computing resources up or down based on the demand of their application. Autoscaling helps users manage their cloud resources more efficiently and cost-effectively by automatically adjusting the number of Amazon EC2 instances in response to changes in application demand. Autoscaling can be used to optimize performance, minimize costs, and ensure availability of applications.
+
+Autoscaling works by monitoring the performance of an application and automatically scaling up or down the number of resources available to the application based on the application’s current demand. Autoscaling can be configured to scale up or down based on a variety of metrics, such as CPU utilization, memory utilization, and network traffic. Autoscaling can also be configured to scale up or down based on a schedule, such as during peak hours or when a specific event occurs.
+
+Autoscaling can be used to optimize the performance of an application by ensuring that the application has the right number of resources available to meet its current demand. Autoscaling can also be used to minimize costs by scaling down resources when they are not needed and scaling up resources when they are needed. Autoscaling can also be used to ensure availability of an application by automatically scaling up resources when demand increases.
+
+## AWS policies, target groups and templates
+
+AWS policies are a set of rules that define how a user or group can interact with AWS services and resources. AWS policies can be used to control access to specific AWS services, resources, and actions.
+
+AWS policies are written in the JSON format and are composed of one or more statements. Each statement consists of an Effect (allow or deny), an Action (the service or resource being accessed), and a Resource (the specific resource being accessed).
+
+AWS policies can be applied to individual users, groups of users, or roles. When applied to a group or role, the policy applies to all users in the group or role.
+
+AWS also provides policy templates that can be used to create custom policies. These templates are pre-defined policies that can be used to quickly create policies that meet specific needs. The templates cover a wide range of use cases, including access control, logging, monitoring, and encryption.
+
+In addition to policies, AWS also provides target groups. Target groups are collections of Amazon EC2 instances, Amazon ECS tasks, or AWS Lambda functions that can be used to control which resources can access a particular AWS service or resource. Target groups can be used to control access to specific services or resources, such as Amazon S3 buckets or Amazon DynamoDB tables.
+
+By combining policies and target groups, organizations can create a secure and efficient environment for managing access to AWS services and resources.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
