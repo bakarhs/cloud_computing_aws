@@ -572,13 +572,55 @@ In addition to policies, AWS also provides target groups. Target groups are coll
 
 By combining policies and target groups, organizations can create a secure and efficient environment for managing access to AWS services and resources.
 
+## Creating a Launch template
+The first step is to name our template specifically and make sure to check the box that does Auto scaling guidance:
+
+![img_1.png](img_1.png)
+
+The next step is to select the correct the right AMI: in our case we needed `Ubuntu Server 18.04` later we will use an ami image we made
+
+We then need to collect the right instance type `t2.micro`, our correct keypair and our existing security group
+
+![img_2.png](img_2.png)
+
+Now what we want to do is provision the start of each AMI so that they are built the same (`Do not do npm start user data`) this can be found at the bottom of the advance settings, in this example we are just installing nginx:
+
+![img_3.png](img_3.png)
 
 
+Finlay, we can now create this template. If we are successful we can head on to Auto Scaling Groups
 
+## Creating an Auto Scaling group
 
+First, we want to start by naming our ASG and selecting our template we just made:
 
+![img_4.png](img_4.png)
 
+Next we need to select the different AZs we would like to use for our EC2:
 
+![img_5.png](img_5.png)
+
+The next step is to attach a load balancer, if we already have one we can add it in , if not we can make a new one. Make sure it's an ALB ,and it is named (no "_") and make sure it is internet facing as our app is internet facing:
+
+![img_6.png](img_6.png)
+
+We need to make sure it is listening on port 80 and add a target group, if you do not have one now is the time to make one. We must check the box for health checks in our ELB because this will be needed so that it now when to increase/ decrease the amount of instances. You can also add cloudWatch metrics to the instances here ,but we will skip this for this example
+
+![img_7.png](img_7.png)
+
+Next we will need to select our desired capacity, min, and max and specify what we are tracking in our scaling policies:
+
+![img_8.png](img_8.png)
+
+Next we can add an SNS topic for our alarm if we would like:
+
+![img_9.png](img_9.png)
+
+Finally, we need to create a Tag to make sure all our instances will be named :
+
+![img_10.png](img_10.png)
+
+Once this is all done we should have our auto-scaling group which will increase our ecs2 when demand in high and decrease back to 2 EC2s when it is low and is highly available in multi AZs. Also, if we were to delete 1 of our EC2s because the desired amount is 2 it should creaet a new one for us automatically, this is incase one ec2 has a failure in the future.
 
 
 
