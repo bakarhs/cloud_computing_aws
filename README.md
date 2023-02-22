@@ -538,7 +538,7 @@ https://www.youtube.com/watch?v=qGS9UiCFVbo
 
 # ALB & Auto scaling
 
-![img.png](img.png)
+![img.png](images/img_18.png)
 
 ## What is an Application Load Balancer
 
@@ -575,17 +575,17 @@ By combining policies and target groups, organizations can create a secure and e
 ## Creating a Launch template
 The first step is to name our template specifically and make sure to check the box that does Auto scaling guidance:
 
-![img_1.png](img_1.png)
+![img_1.png](images/img_19.png)
 
 The next step is to select the correct the right AMI: in our case we needed `Ubuntu Server 18.04` later we will use an ami image we made
 
 We then need to collect the right instance type `t2.micro`, our correct keypair and our existing security group
 
-![img_2.png](img_2.png)
+![img_2.png](images/img_20.png)
 
 Now what we want to do is provision the start of each AMI so that they are built the same (`Do not do npm start user data`) this can be found at the bottom of the advance settings, in this example we are just installing nginx:
 
-![img_3.png](img_3.png)
+![img_3.png](images/img_21.png)
 
 
 Finlay, we can now create this template. If we are successful we can head on to Auto Scaling Groups
@@ -594,31 +594,31 @@ Finlay, we can now create this template. If we are successful we can head on to 
 
 First, we want to start by naming our ASG and selecting our template we just made:
 
-![img_4.png](img_4.png)
+![img_4.png](images/img_22.png)
 
 Next we need to select the different AZs we would like to use for our EC2:
 
-![img_5.png](img_5.png)
+![img_5.png](images/img_23.png)
 
 The next step is to attach a load balancer, if we already have one we can add it in , if not we can make a new one. Make sure it's an ALB ,and it is named (no "_") and make sure it is internet facing as our app is internet facing:
 
-![img_6.png](img_6.png)
+![img_6.png](images/img_24.png)
 
 We need to make sure it is listening on port 80 and add a target group, if you do not have one now is the time to make one. We must check the box for health checks in our ELB because this will be needed so that it now when to increase/ decrease the amount of instances. You can also add cloudWatch metrics to the instances here ,but we will skip this for this example
 
-![img_7.png](img_7.png)
+![img_7.png](images/img_25.png)
 
 Next we will need to select our desired capacity, min, and max and specify what we are tracking in our scaling policies:
 
-![img_8.png](img_8.png)
+![img_8.png](images/img_26.png)
 
 Next we can add an SNS topic for our alarm if we would like:
 
-![img_9.png](img_9.png)
+![img_9.png](images/img_27.png)
 
 Finally, we need to create a Tag to make sure all our instances will be named :
 
-![img_10.png](img_10.png)
+![img_10.png](images/img_28.png)
 
 Once this is all done we should have our auto-scaling group which will increase our ecs2 when demand in high and decrease back to 2 EC2s when it is low and is highly available in multi AZs. Also, if we were to delete 1 of our EC2s because the desired amount is 2 it should create a new one for us automatically, this is incase one ec2 has a failure in the future.
 
@@ -643,7 +643,7 @@ Re select our 3 AZ's
 
 This time round we don't need to make a load balancer we can select the one that is already created, make sure the target group is also selected:
 
-![img_11.png](img_11.png)
+![img_11.png](images/img_29.png)
 
 We again are skipping cloudWatch for now as this is just a test
 
@@ -651,9 +651,7 @@ The Group size and scaling policy can remain the same (I have increased the CPU 
 
 Make sure to re-enter the Tag`Name`
 
-Note - All these steps are to allow us to run our app AMI without the need to ssh into our instances.
-
-
+Note - All these steps are to allow us to run our app AMI without the need to ssh into our instances
 
 
 
