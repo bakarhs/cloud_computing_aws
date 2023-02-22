@@ -98,6 +98,90 @@ A route table is a configuration object in Amazon Web Services (AWS) that is use
 
 Overall, route tables are an important tool for managing traffic routing within a VPC, improving network performance, flexibility, security, and management. They allow for the efficient and secure routing of network traffic between resources within a VPC, as well as to destinations outside the VPC.
 
+# Creating a virtual private cloud
+
+![img_7.png](img_7.png)
+
+The  first step is create our VPC, we only want a vpc and we will build and attach the rest of our vpc independently:
+
+![img.png](img.png)
+
+Next we need to create our internet gateway and attach it to our VPC:
+
+![img_1.png](img_1.png)
+
+![img_2.png](img_2.png)
+
+The next step is to create our public subnet for ann app (make sure IPV4 CIDER block that you choose is not already in use) :
+
+![img_3.png](img_3.png)
+
+We now need to create a Rout Table:
+
+![img_4.png](img_4.png)
+
+Next edit the RT to allow traffic from the internet (You want to edit subnet association and select the right subnets)
+
+![img_5.png](img_5.png)
+
+The next step is to edit the routes and allow internet gateway (you want to select the one you created)
+
+![img_6.png](img_6.png)
+
+## Creating an app in our VPC
+
+So when creating an EC2 instance we are going to:
+
+- name appropriately
+- use our app AMI
+- select t2micro
+- select our keypair
+- pick our VPC we made
+- create a new security group that will listen on port 22, 80, and 3000
+- we can also input user data to speed up the apps launch 
+
+If we add user data we will later have to ssh into our app and make sure to kill and restart the app
+```
+# check our processes
+sudo lsof -i :3000
+# kill the process
+sudo kill -9 <PID>  # of process using port 3000
+
+```
+```
+#!/bin/bash
+
+sudo apt update -y 
+sudo apt upgrade -y
+
+cd /home/ubuntu/tech210_virtualisation/tech201_virtualisation/app # This is my specific path to my node.js file
+
+nohup npm start 2>/dev/null 1>/dev/null&  # This code starts our application for us inside our user data
+```
+
+This will allow us to have an app in our new vpc.
+
+# Creating a database in our vpc 
+
+We want to :
+
+- Begin by creating a new private subnet and allowing the ports we need :22 and 27017
+- Create a route table for our private subnet
+- Create  an ec2 for our database that is private (make a new security group)
+- ssh into app
+- Create env variable
+```
+export DB_HOST=mongodb://<ip address>:27017/posts
+```
+- Seed database and run app
+
+
+
+
+
+
+
+
 
 
 
