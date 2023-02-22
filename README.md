@@ -620,7 +620,41 @@ Finally, we need to create a Tag to make sure all our instances will be named :
 
 ![img_10.png](img_10.png)
 
-Once this is all done we should have our auto-scaling group which will increase our ecs2 when demand in high and decrease back to 2 EC2s when it is low and is highly available in multi AZs. Also, if we were to delete 1 of our EC2s because the desired amount is 2 it should creaet a new one for us automatically, this is incase one ec2 has a failure in the future.
+Once this is all done we should have our auto-scaling group which will increase our ecs2 when demand in high and decrease back to 2 EC2s when it is low and is highly available in multi AZs. Also, if we were to delete 1 of our EC2s because the desired amount is 2 it should create a new one for us automatically, this is incase one ec2 has a failure in the future.
+
+## Creating an auto-scaling group with our app AMI
+
+We want to begin by creating our new Launch template, this time adding in our app AMI and changing the user data.
+
+```
+#!/bin/bash
+
+sudo apt update -y 
+sudo apt upgrade -y
+
+cd /home/ubuntu/tech210_virtualisation/tech201_virtualisation/app # This is my specific path to my node.js file
+
+nohup npm start 2>/dev/null 1>/dev/null&  # This code starts our application for us inside our user data
+```
+
+Now we need to create our ASG. We want to make sure to name accordingly and select our new template: add ami to the name.
+
+Re select our 3 AZ's
+
+This time round we don't need to make a load balancer we can select the one that is already created, make sure the target group is also selected:
+
+![img_11.png](img_11.png)
+
+We again are skipping cloudWatch for now as this is just a test
+
+The Group size and scaling policy can remain the same (I have increased the CPU utilization to 80+ so it can have some breathing room) 
+
+Make sure to re-enter the Tag`Name`
+
+Note - All these steps are to allow us to run our app AMI without the need to ssh into our instances.
+
+
+
 
 
 
