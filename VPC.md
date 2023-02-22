@@ -1,6 +1,6 @@
 # VPC
 
-![VPC_diagram.png](VPC images/VPC_diagram.png)
+![img_12.png](VPC images/VPC_diagram.png)
 
 ## What are VPCs
 
