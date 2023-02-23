@@ -98,6 +98,10 @@ A route table is a configuration object in Amazon Web Services (AWS) that is use
 
 Overall, route tables are an important tool for managing traffic routing within a VPC, improving network performance, flexibility, security, and management. They allow for the efficient and secure routing of network traffic between resources within a VPC, as well as to destinations outside the VPC.
 
+## NACL
+
+These are on a subnet level, and the difference between an NACL and a security group is that you must specify on both inbound and outbound rules in a NACL but on security groups you just have to specify the inbound rules.
+
 # Creating a virtual private cloud
 
 ![img_7.png](img_7.png)
